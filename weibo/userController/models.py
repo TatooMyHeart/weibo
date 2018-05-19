@@ -32,7 +32,7 @@ class WB(models.Model):
         result['id']=temp.id
         result['content']=temp.content
         result['time']=temp.time.strftime("%Y-%m-%d")
-        #result['userid']=temp.userid
+        result['userid']=temp.userid
         result['plnum']=temp.plnum
         return result
     def listToJson(temp):
@@ -40,7 +40,7 @@ class WB(models.Model):
         result['id'] = temp.id
         result['content'] = temp.content
         result['time'] = temp.time.strftime("%Y-%m-%d")
-        #result['userid'] = temp.userid
+        result['userid'] = temp.userid
         result['plnum'] = temp.plnum
         result['isfollow']=0
         return result
@@ -72,6 +72,6 @@ class Comment(models.Model):
         result['content']=temp.content
         result['time']=temp.time.strftime("%Y-%m-%d")
         result['WBid']=temp.WBid
-        #result['userid']=temp.userid
+        result['userid']=temp.userid
         return result
 

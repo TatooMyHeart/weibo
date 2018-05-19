@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+	<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+		<title>我的主页</title>
+
+		<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+		<link rel="stylesheet" href="css/style.css">
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+		<script src="js/index.js"></script>
+		<script src="js/jQuery.js"></script>
+		<script>
+			var baseurl = "http://127.0.0.1:8000";
+		</script>
+	</head>
+
+	<body onload="javascript:scripts()">
+		<!-- 添加微博（Modal） -->
+		<div class="modal fade" id="addBlog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"><strong>请在此处添加微博内容</strong></h4>
+					</div>
+					<form id="addblogform">
+						<div class="modal-body">
+							<textarea class="form-control" rows="3" placeholder="字数不超过139个字" maxlength="139"></textarea>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+							<button type="button" class="btn btn-primary" id="addBlogbtn">
+					发表微博
+				</button>
+						</div>
+					</form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!-- 关注/粉丝 详细信息（Modal） -->
+		<div class="modal fade" id="showFollow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel"><strong>我关注的人</strong></h4>
+						<ul id="folist" class="list-inline">
+
+						</ul>
+					</div>
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel"><strong>我的粉丝</strong></h4>
+						<ul id="fanlist" class="list-inline">
+
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal -->
+		</div>
+		<!--导航条-->
+		<nav class="navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">微博</a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户设置<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#">退出</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!--巨幕-->
+		<div class="jumbotron">
+			<div class="container">
+				<h1>我的主页</h1>
+				<h2><span id="uName">用户名</span><small>/id:<span id="uId"></span></small></h2>
+			</div>
+		</div>
+		<!--主体-->
+		<div class="container">
+			<!--行分块-->
+			<div class="row">
+				<!--侧边栏-->
+				<div class="col-md-3 sidebar" id="left">
+					<h3 class="sub-header">
+						<strong>关于我</strong>
+						<button id="loadFlist" type="button" class="pull-right btn btn-default btn-xs" data-toggle="modal" data-target="#showFollow">
+							<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+							详细
+						</button>
+					</h3>
+					<hr />
+					<!--关注数/粉丝数/微博数-->
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th class="text-center">关注数</th>
+								<th class="text-center">粉丝数</th>
+								<th class="text-center">微博数</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td id="foNum" class="text-center"></td>
+								<td id="fanNum" class="text-center"></td>
+								<td id="blogNum" class="text-center"></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+				<!--微博栏-->
+				<div class="col-md-9" id="right">
+					<div>
+						<h3 class="sub-header">
+						<strong>微博列表</strong>
+						<button type="button" class="pull-right btn btn-default" data-toggle="modal" data-target="#addBlog">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							添加微博
+						</button>
+					</h3>
+					</div>
+					<hr />
+					<!--这里是单个微博-->
+					<div class="panel panel-info">
+						<div class="panel-body">
+							示例内容content
+						</div>
+						<table class="table">
+							<tbody>
+								<tr>
+									<td class="text-center">
+										<img src="..." class="img-circle">
+										<strong>发布人：<span>xx</span></strong>
+										<button type="button" class=" btn btn-default btn-xs"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>关注</button>
+									</td>
+									<td>|</td>
+									<td class="text-center">
+										评论数：<span>2</span>
+										<a class="caret" data-toggle="collapse" href="#Commends" aria-expanded="false" aria-controls="collapseExample"></a>
+									</td>
+									<td>|</td>
+									<td class="text-center">
+										发布时间：<span>2018-05-08</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<!--这里是评论内容-->
+						<div class="collapse" id="Commends">
+							<div class="well">
+								<form id="blogid_1">
+									<div class="input-group">
+										<input type="text" maxlength="100" class="form-control" placeholder="不超过30字...">
+										<span class="input-group-btn">
+        									<button class="btn btn-default" type="button">发表评论</button>
+      									</span>
+									</div>
+								</form>
+								<hr />
+								<ul class="list-unstyled">
+									<li>
+										<p>
+											<span>4</span>
+											<strong> : </strong> 假装这里有评论
+											<small class="pull-right">2018-05-07</small>
+										</p>
+										<hr />
+									</li>
+									<li>
+										<p>假装这里有评论</p>
+										<hr />
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="blogs">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!--<meta http-equiv="Access-Control-Allow-Origin" content="*" />-->
+		<title>我的主页</title>
+
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script>
+            function trry() {
+                console.log("in");
+                var value={
+                    "username":"test2",
+                    "password":"test2"
+                }
+
+                $.ajax({
+
+                    type:"POST",
+                    url:"http://127.0.0.1:8000/logIn/",
+                    data:JSON.stringify(value),
+                    //dataType:"json",
+                    error:function(request){
+                        console.log("error");
+                    },
+                    success:function(res){
+                        console.log("success");
+                        console.log(res);
+                    }
+                })
+            }
+        </script>
+	</head>
+
+	<body>
+		<form id="login">
+			<input type="text" id="name"/>
+			<input type="text" id="pswd"/>
+			<input type="button" onclick="trry()"/>
+		</form>
+
+	</body>
+
+</html>

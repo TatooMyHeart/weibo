@@ -14,6 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls.static import static
+import os
+from django.conf import settings
 from django.conf.urls import url
 from userController import views
 
@@ -30,5 +33,11 @@ urlpatterns = [
     url(r'^logout/$',views.logout),
     url(r'^sendP/$',views.sendP),
     url(r'^sendWb/$',views.sendWb),
-    url(r'^$',views.logIn),
+
 ]
+
+
+if settings.DEBUG:
+    media_root =os.path.join(settings.BASE_DIR,'templates')
+    urlpatterns+=static('/templates/',document_root=media_root)
+
