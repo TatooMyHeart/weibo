@@ -7,9 +7,10 @@
 		<title>我的主页</title>
 
 		<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
-		<link rel="stylesheet" href="../static/css/style.css">
+		<link rel="stylesheet" href="../templates/static/css/style.css">
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="../templates/static/js/login.js"></script>
 
 		<script>var baseurl = "http://127.0.0.1:8000";</script>
@@ -57,7 +58,7 @@
 									<input type="password" class="form-control" id="Lpassword" placeholder="输入您的密码">
 								</div>
 								<!--<button id="loginbtn" type="submit" class="btn btn-default">登陆</button>-->
-								<button id="loginbtn" class="btn btn-default">登陆</button>
+								<button id="loginbtn" onclick="login()" class="btn btn-default">登陆</button>
 							</form>
 						</div>
 						<div class="tab-pane fade" id="registerdiv">

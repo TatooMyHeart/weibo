@@ -1,4 +1,6 @@
 import simplejson
+from django.shortcuts import render
+
 from userController import models
 from django.core import serializers
 import json
@@ -15,6 +17,7 @@ def logIn(request):
     userInfo = simplejson.loads(request.body)
     username=userInfo['username']
     password=userInfo['password']
+    print(password)
     try:
         user=models.User.objects.get(username=username)
         if user.username == username:
@@ -25,7 +28,8 @@ def logIn(request):
             print(ps)
             if user.password==ps:
                 request.session['userid'] = user.id
-                return HttpResponse('success')
+                #return HttpResponse('success')
+                return render(request,"/templages/homepage.html")
             else:
                 return HttpResponse('password_error')
         else:
@@ -88,7 +92,9 @@ def sendWb(request):
     if not b:
         return HttpResponse('not_logIn')
     try:
-        content = request.POST['content']
+        conInfo=simplejson.loads(request.body)
+        content = conInfo['content']
+        print(content)
         userid = request.session['userid']
         print(userid,content)
         wb=models.WB(content=content,userid=userid)

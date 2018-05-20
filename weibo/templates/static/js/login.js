@@ -1,43 +1,59 @@
-$(document).ready(function(){
-	//$("#login").submit(function() {
-	//	loginForm();
-	//});
-	$("#register").submit(function() {
-		regisForm();
-	});
-	$("#loginbtn").click(function() {
-		console.log("in");
-		$.ajax({
-			type:"POST",
-			url:"http://127.0.0.1/logIn/",
-			async:false,
-			data: JSON.stringify({
+function login(){
+	var form = {
 				"username":$("#Lusername").val(),
 				"password":$("#Lpassword").val()
-			}),
+		}
+	console.log("in")
+	$.ajax({
+			type:"post",
+			url:"http://127.0.0.1/logIn/",
+			async:false,
+			data: JSON.stringify(form),
 			contentType:"application/json;charset=utf-8",
-			dataType:"json",
+			//dataType:"jsonp",
 			error:function(request){
 				console.log("error");
 			},
 			success:function(res){
+				console.log("success");
 				console.log(res);
 			}
-		});
-	});
-	$("#registerbtn").click(function() {
-		$.post(
-			baseurl+"/register/",
-			//		{
-			//				username: document.forms["register"]["username"].value,
-			//				password: document.forms["register"]["password0"].value
-			//			},
-			$("#register").serialize(),
-			function(data,textStatus) {
-				regist_alt(textStatus);
-			});
-	});
-});
+	})
+}
+//$(document).ready(function(){
+//	$("#login").submit(function() {
+//		loginForm();
+//	});
+//	$("#register").submit(function() {
+//		regisForm();
+//	});
+//	$("#loginbtn").click(function() {
+//		console.log("in");
+//		var login = $.ajax({
+//			type:"post",
+//			url:"http://127.0.0.1/logIn/",
+//			async:false,
+//			data: JSON.stringify(),
+//			contentType:"application/json;charset=utf-8",
+//			dataType:"jsonp",
+//			success:function(data){
+//				console.log(data);
+//			}
+//		});
+//	});
+//	$("#registerbtn").click(function() {
+//		$.post(
+//			baseurl+"/register/",
+//			//		{
+//			//				username: document.forms["register"]["username"].value,
+//			//				password: document.forms["register"]["password0"].value
+//			//			},
+//			$("#register").serialize(),
+//			function(data,textStatus) {
+//				regist_alt(textStatus);
+//			});
+//	});
+//});
 
 function regisForm() {
 	var name = document.forms["register"]["username"].value;
